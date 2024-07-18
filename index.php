@@ -75,8 +75,12 @@
             $conn = new mysqli($servername, $username, $password, $dbname);
             $conn->set_charset('utf8');
             $_SESSION['waves'] = array();
-            $q = "SELECT id, name, current, client, sorting FROM efes.wave WHERE wave.hidden_on_web = 0;";
+            $q = "SELECT id, name, current, client, sorting FROM efes.wave" 
+              . " WHERE project_id=16 && wave.hidden_on_web=0;";
             $result_qaz = $conn->query($q);
+            while($row_in = $result_qaz->fetch_assoc()) {
+                $_SESSION['waves'][] = $row_in;
+            }
         ?>
         <div class="transparentBoxDiv" style="width:1160px">
                 <div id="map" style="display: inline-block;"></div>
