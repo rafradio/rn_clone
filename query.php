@@ -1,5 +1,5 @@
 <?php
-//    session_start();
+    session_start();
     $input = fopen("config.txt", "r");
     while(!feof($input)) { 
         $dataDB[] = trim(fgets($input));
@@ -31,9 +31,9 @@
 	group by s.dealer_id
 	order by tt
 	";
-    $_SESSION['mapback'] = array();
-    $cat = 0;
-    $_SESSION['mapback'][0] = "RN2019_Clone/query.php";
+//    $_SESSION['mapback'] = array();
+//    $cat = 0;
+//    $_SESSION['mapback'][0] = "RN2019_Clone/query.php";
 if (empty($_GET['type'])) {
     
 
@@ -65,6 +65,7 @@ if (empty($_GET['type'])) {
 //        $out['backLink'] = $_SERVER['REQUEST_URI'];  
         
         $out['backLink'] = "/RN2019_Clone/query.php";
+        $out['session'] = $_SESSION['waves'][0];
 	$cat = 0;
 } elseif ($_GET['type'] == 'div') {
         
@@ -94,6 +95,7 @@ if (empty($_GET['type'])) {
                     $out['data'][$key]['tt'] = round($value['tt'],2);
         }
         $out['backLink'] = "/RN2019_Clone/query.php";
+        $out['session'] = $_SESSION['waves'][0];
         $_SESSION['mapback'][1] = "/query.php?type=div&id=" . intval($_GET['id']);
 	$cat = 1;
     
@@ -115,6 +117,7 @@ if (empty($_GET['type'])) {
                     $out['data'][$key]['tt'] = round($value['tt'],2);
         }
         $out['backLink'] = "/RN2019_Clone/query.php";
+        $out['session'] = $_SESSION['waves'][0];
 }
        // echo (json_encode($total_rez,JSON_UNESCAPED_UNICODE));
 //    if (!empty($cat)) {$out['backLink'] = $_SESSION['mapback'][($cat-1)];}
