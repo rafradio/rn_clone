@@ -85,7 +85,15 @@
         <div class="transparentBoxDiv" style="width:1160px">
                 <div id="map" style="display: inline-block;"></div>
                 <div id="data001" style="display: none">
-
+                        
+                    
+                        <div style="padding:5px; border:0px; margin-top:5px;">
+                                <select name="wave" id="id_wave" onChange="mapObj.chgWave()">
+                                        <?php foreach ($_SESSION['waves'] as $arr): ?>		
+                                                <option value="<?=$arr['id']?>"><?=$arr['name']?></option>			
+                                        <?php endforeach; ?>	
+                                </select>
+                        </div>
                         <div style="padding:5px; border:0px; margin-top:5px;">
                         </div>
 
