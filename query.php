@@ -45,11 +45,11 @@ if (empty($_GET['type'])) {
                     select d.id AS ids, avg(t.fisrt_score_total) as tt from rosneft_21.tmp_stat_total2 t 
                     join rosneft_21.shops s on t.shop_id=s.shop_id
                     join rosneft_21.dealer d on d.id=s.dealer_id	
-                    where wave = 367
-                    group by s.dealer_id order by tt
+                    where wave = ". intval($_GET['wavePr']) .
+                    " group by s.dealer_id order by tt
             ) t2 ON d.id = t2.ids
-            where wave = 367
-            group by s.dealer_id
+            where wave = ". intval($_GET['wave']) .
+            " group by s.dealer_id
             order by tt
             ";
 
@@ -64,7 +64,7 @@ if (empty($_GET['type'])) {
         }
 //        $out['backLink'] = $_SERVER['REQUEST_URI'];  
         
-        $out['backLink'] = "/RN2019_Clone/query.php";
+        $out['backLink'] = "http://localhost/RN2019_Clone/query.php";
         $out['session'] = $_SESSION['waves'][0];
 	$cat = 0;
 } elseif ($_GET['type'] == 'div') {
@@ -94,7 +94,7 @@ if (empty($_GET['type'])) {
         foreach ($out['data'] as $key => $value) {
                     $out['data'][$key]['tt'] = round($value['tt'],2);
         }
-        $out['backLink'] = "/RN2019_Clone/query.php";
+        $out['backLink'] = "http://localhost/RN2019_Clone/query.php";
         $out['session'] = $_SESSION['waves'][0];
         $_SESSION['mapback'][1] = "/query.php?type=div&id=" . intval($_GET['id']);
 	$cat = 1;
@@ -116,7 +116,7 @@ if (empty($_GET['type'])) {
         foreach ($out['data'] as $key => $value) {
                     $out['data'][$key]['tt'] = round($value['tt'],2);
         }
-        $out['backLink'] = "/RN2019_Clone/query.php";
+        $out['backLink'] = "http://localhost/RN2019_Clone/query.php";
         $out['session'] = $_SESSION['waves'][0];
 }
        // echo (json_encode($total_rez,JSON_UNESCAPED_UNICODE));
