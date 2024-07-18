@@ -36,7 +36,7 @@ mapObj.getData = function(url1) {
             mapObj.inType = iObject.type;
             console.log(mapObj.inType);
             mapObj.backLink = iObject.backLink;
-            console.log("Оюратная ссылка = ", mapObj.backLink);
+            console.log("Тест сессии = ", iObject.session);
             mapObj.parseData();
             mapObj.initMap();
             mapObj.createMap();
