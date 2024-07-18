@@ -66,7 +66,7 @@ mapObj.initMap = function() {
                 let flag = 'div';
 		document.getElementById('navi').style.display = "";
 		document.getElementById('navi').innerHTML = "<span onClick='mapObj.navClick(\"div\"); return false;'>Россия</span> > "+
-													"<span onClick='mapObj.navClick(\""+this.linkDiv['url']+"\"); return false;'>"+this.linkDiv['nme']+"</span>";
+													"<span onClick='mapObj.navClick(\"div\"); return false;'>"+this.linkDiv['nme']+"</span>";
 	} else if (mapObj.inType == 'cities') {
                 let flag = 'div';
 		document.getElementById('navi').style.display = "";
@@ -93,13 +93,13 @@ mapObj.initMap = function() {
     	tName = "Магазины";
 	}
 	
-//	var n = document.getElementById("id_wave").options.selectedIndex;
-//	var $m1 = document.getElementById("id_wave").options[n].text.split(" ",1);
-//	var $m2 = (document.getElementById("id_wave").options[n+1]) ? document.getElementById("id_wave").options[n+1].text.split(" ",1) : "-";
+	let n = document.getElementById("id_wave").options.selectedIndex;
+	let $m1 = document.getElementById("id_wave").options[n].text.split(" ",1);
+	let $m2 = (document.getElementById("id_wave").options[n+1]) ? document.getElementById("id_wave").options[n+1].text.split(" ",1) : "-";
 
-        let n = 14;
-        var $m1 = 14;
-        var $m2 = 14;
+//        let n = 14;
+//        var $m1 = 14;
+//        var $m2 = 14;
         
         
 	st1 = document.createElement('td'); st1.setAttribute('style', 'font:13px LatoWeb; color:#455d7a; font-weight:bold'); st1.innerHTML = tName; 
@@ -480,9 +480,15 @@ mapObj.navClick = function(link){
 	} else if (mapObj.inType == 'cluster') {
 		this.linkCity = [];
 	}	
-        url = (link == 'div') ? mapObj.backLink: link; 
+        url = (link == 'div') ? new URL(mapObj.backLink): link; 
 	console.log('navClick: '+url);
-	mapObj.map = null;
+        let n = document.getElementById("id_wave").options.selectedIndex;
+        let wave = document.getElementById('id_wave').value;
+        let wavePrevous = (document.getElementById("id_wave").options[n-1]) ? document.getElementById("id_wave").options[n-1].value: null;
+        //let link1 = new URL(link);
+        url.searchParams.set('wave', wave);
+        url.searchParams.set('wavePr', wavePrevous);
+        mapObj.map = null;
 	mapObj.inObject = {};
 	mapObj.inType = {};
 	mapObj.getData(url);
@@ -530,19 +536,27 @@ mapObj.emMarkerLeave = function(id){
 };
 
 mapObj.backIndex = function(e){
-	var link = mapObj.backLink;
-        console.log("еще одна обратная ссылка = ", link);
-	document.getElementById('map').innerHTML = '';
-	if (mapObj.inType == 'div'){
-		this.linkCluster = [];
-		this.linkCity = [];
-	} else if (mapObj.inType == 'cluster') {
-		this.linkCity = [];
-	}	
-	mapObj.map = null;
-	mapObj.inObject = {};
-	mapObj.inType = {};
-	mapObj.getData(link);
+    let n = document.getElementById("id_wave").options.selectedIndex;
+    let wave = document.getElementById('id_wave').value;
+    let wavePrevous = (document.getElementById("id_wave").options[n-1]) ? document.getElementById("id_wave").options[n-1].value: null;
+    //let url = new URL('http://localhost/RN2019_Clone/query.php');
+    url.searchParams.set('wave', wave);
+    url.searchParams.set('wavePr', wavePrevous);
+    let link = new URL(mapObj.backLink);
+    link.searchParams.set('wave', wave);
+    link.searchParams.set('wavePr', wavePrevous);
+    console.log("еще одна обратная ссылка = ", link);
+    document.getElementById('map').innerHTML = '';
+    if (mapObj.inType == 'div'){
+            this.linkCluster = [];
+            this.linkCity = [];
+    } else if (mapObj.inType == 'cluster') {
+            this.linkCity = [];
+    }	
+    mapObj.map = null;
+    mapObj.inObject = {};
+    mapObj.inType = {};
+    mapObj.getData(link);
 };
 
 mapObj.shopOpen = function (id){
@@ -555,8 +569,14 @@ mapObj.shopOpen = function (id){
 };
 
 ymaps.ready(function(){
+    let n = document.getElementById("id_wave").options.selectedIndex;
+//	var $m1 = document.getElementById("id_wave").options[n].text.split(" ",1);
+//	var $m2 = (document.getElementById("id_wave").options[n+1]) ? document.getElementById("id_wave").options[n+1].text.split(" ",1) : "-";
+    let wave = document.getElementById('id_wave').value;
+    let wavePrevous = (document.getElementById("id_wave").options[n-1]) ? document.getElementById("id_wave").options[n-1].value: null;
     let url = new URL('http://localhost/RN2019_Clone/query.php');
-//    url.searchParams.set('type', 'div');
+    url.searchParams.set('wave', wave);
+    url.searchParams.set('wavePr', wavePrevous);
     mapObj.getData(url);
 });
 
