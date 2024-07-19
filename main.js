@@ -20,7 +20,7 @@ let mapObj = {
 mapObj.getData = function(url1) {
     var req;
     mapObj.curUrl = url1;
-    //wave = document.getElementById('id_wave').value;
+    //wave = document.getElementById('id_map_wave').value;
     url =  url1;
     if (window.XMLHttpRequest) {
         req = new XMLHttpRequest();
@@ -52,9 +52,9 @@ mapObj.initMap = function() {
 	document.getElementById('linkback').style.display = (mapObj.inType !== 'div') ? "" : "none";		
 	this.zoom = 10;
 
-	document.getElementById('data001').style.display = "";
-	document.getElementById('data002').style.display = "none";
-	document.getElementById('data001').style.Overflow = "auto";
+	document.getElementById('data003').style.display = "";
+	document.getElementById('data004').style.display = "none";
+	document.getElementById('data003').style.Overflow = "auto";
 	document.getElementById('ptbl').innerHTML = '';
 	
 	document.getElementById('navi').style.display = "none";
@@ -93,9 +93,9 @@ mapObj.initMap = function() {
     	tName = "Магазины";
 	}
 	
-	let n = document.getElementById("id_wave").options.selectedIndex;
-	let $m1 = document.getElementById("id_wave").options[n].text.split(" ",1);
-	let $m2 = (document.getElementById("id_wave").options[n+1]) ? document.getElementById("id_wave").options[n+1].text.split(" ",1) : "-";
+	let n = document.getElementById("id_map_wave").options.selectedIndex;
+	let $m1 = document.getElementById("id_map_wave").options[n].text.split(" ",1);
+	let $m2 = (document.getElementById("id_map_wave").options[n+1]) ? document.getElementById("id_map_wave").options[n+1].text.split(" ",1) : "-";
 
 //        let n = 14;
 //        var $m1 = 14;
@@ -176,7 +176,7 @@ mapObj.initMap = function() {
 		tr.appendChild(td4);
 	}
 	document.getElementById('cnttask1').innerHTML = this.chkcnt;
-	rightHeight = document.getElementById('data001').offsetHeight;
+	rightHeight = document.getElementById('data003').offsetHeight;
 	log = (rightHeight > 510) ? rightHeight : 510;
 	document.getElementById('map').style.height = ''+log+'px';
 };
@@ -482,9 +482,9 @@ mapObj.navClick = function(link){
 	}	
         url = (link == 'div') ? new URL(mapObj.backLink): link; 
 	console.log('navClick: '+url);
-        let n = document.getElementById("id_wave").options.selectedIndex;
-        let wave = document.getElementById('id_wave').value;
-        let wavePrevous = (document.getElementById("id_wave").options[n-1]) ? document.getElementById("id_wave").options[n-1].value: null;
+        let n = document.getElementById("id_map_wave").options.selectedIndex;
+        let wave = document.getElementById('id_map_wave').value;
+        let wavePrevous = (document.getElementById("id_map_wave").options[n-1]) ? document.getElementById("id_map_wave").options[n-1].value: null;
         //let link1 = new URL(link);
         url.searchParams.set('wave', wave);
         url.searchParams.set('wavePr', wavePrevous);
@@ -536,9 +536,9 @@ mapObj.emMarkerLeave = function(id){
 };
 
 mapObj.backIndex = function(e){
-    let n = document.getElementById("id_wave").options.selectedIndex;
-    let wave = document.getElementById('id_wave').value;
-    let wavePrevous = (document.getElementById("id_wave").options[n-1]) ? document.getElementById("id_wave").options[n-1].value: null;
+    let n = document.getElementById("id_map_wave").options.selectedIndex;
+    let wave = document.getElementById('id_map_wave').value;
+    let wavePrevous = (document.getElementById("id_map_wave").options[n-1]) ? document.getElementById("id_map_wave").options[n-1].value: null;
     //let url = new URL('http://localhost/RN2019_Clone/query.php');
     url.searchParams.set('wave', wave);
     url.searchParams.set('wavePr', wavePrevous);
@@ -560,7 +560,7 @@ mapObj.backIndex = function(e){
 };
 
 mapObj.shopOpen = function (id){
-//	let wave = document.getElementById('id_wave').value;
+//	let wave = document.getElementById('id_map_wave').value;
         let url = new URL('https:/rn.imystery.ru/page/show_anketa/');
         url.searchParams.set('chk_id', id);
         console.log("uri to rosneft = ", url.toString());
@@ -569,11 +569,11 @@ mapObj.shopOpen = function (id){
 };
 
 ymaps.ready(function(){
-    let n = document.getElementById("id_wave").options.selectedIndex;
-//	var $m1 = document.getElementById("id_wave").options[n].text.split(" ",1);
-//	var $m2 = (document.getElementById("id_wave").options[n+1]) ? document.getElementById("id_wave").options[n+1].text.split(" ",1) : "-";
-    let wave = document.getElementById('id_wave').value;
-    let wavePrevous = (document.getElementById("id_wave").options[n-1]) ? document.getElementById("id_wave").options[n-1].value: null;
+    let n = document.getElementById("id_map_wave").options.selectedIndex;
+//	var $m1 = document.getElementById("id_map_wave").options[n].text.split(" ",1);
+//	var $m2 = (document.getElementById("id_map_wave").options[n+1]) ? document.getElementById("id_map_wave").options[n+1].text.split(" ",1) : "-";
+    let wave = document.getElementById('id_map_wave').value;
+    let wavePrevous = (document.getElementById("id_map_wave").options[n-1]) ? document.getElementById("id_map_wave").options[n-1].value: null;
     let url = new URL('http://localhost/RN2019_Clone/query.php');
     url.searchParams.set('wave', wave);
     url.searchParams.set('wavePr', wavePrevous);
@@ -589,7 +589,7 @@ function getChk(id){
         url.searchParams.set('type', mapObj.inType);
         url.searchParams.append('id', id);
         console.log("url точки = ", url.toString());
-//	wave = document.getElementById('id_wave').value;
+//	wave = document.getElementById('id_map_wave').value;
 	if (window.XMLHttpRequest) {
 		req = new XMLHttpRequest();
 	} else if (window.ActiveXObject) {
@@ -617,7 +617,7 @@ function blk(obj, coord){
 			document.getElementById('pan').parentNode.removeChild(document.getElementById('pan'));
 		}
 	});
-	document.getElementById("data001").addEventListener("mousedown" , function() {
+	document.getElementById("data003").addEventListener("mousedown" , function() {
 		if (document.getElementById("pan")){
 			document.getElementById('pan').parentNode.removeChild(document.getElementById('pan'));
 		}
