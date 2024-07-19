@@ -18,7 +18,7 @@
 		height: 510px;
 		vertical-align: top;
 		}
-	#data001,  #data002{
+	#data003,  #data004{
 		display: inline-block;
 		width: 357px;
 		min-height: 510px;
@@ -35,12 +35,12 @@
 		text-align:left;
  		color:#455d7a;
 		}
-	#data001 h4, #data002 h4{font:11px LatoWeb; font-weight:bold; margin:5px; padding-bottom: 0px; color:#92a0b2; text-align: center;}
+	#data003 h4, #data004 h4{font:11px LatoWeb; font-weight:bold; margin:5px; padding-bottom: 0px; color:#92a0b2; text-align: center;}
 	.tnum{font:28px Arial; color:#455d7a;}
-	#data001 td, #data001 div{border:1px dashed #EEE; padding:7px 0px 7px;}
-	#data001 a{font-weight: normal;}
-	#data002 td {border:1px dashed #EEE; padding:7px 0px 7px 10px;}
-	#id_wave {
+	#data003 td, #data003 div{border:1px dashed #EEE; padding:7px 0px 7px;}
+	#data003 a{font-weight: normal;}
+	#data004 td {border:1px dashed #EEE; padding:7px 0px 7px 10px;}
+	#id_map_wave {
 	    width: 280px;
 	    border-width: 1px;
 	    border-radius: 3px;
@@ -84,11 +84,11 @@
         ?>
         <div class="transparentBoxDiv" style="width:1160px">
                 <div id="map" style="display: inline-block;"></div>
-                <div id="data001" style="display: none">
+                <div id="data003" style="display: none">
                         
                     
                         <div style="padding:5px; border:0px; margin-top:5px;">
-                                <select name="wave" id="id_wave" onChange="mapObj.chgWave()">
+                                <select name="wave" id="id_map_wave" onChange="mapObj.chgWave()">
                                         <?php foreach ($_SESSION['waves'] as $arr): ?>		
                                                 <option value="<?=$arr['id']?>"><?=$arr['name']?></option>			
                                         <?php endforeach; ?>	
@@ -106,7 +106,7 @@
                 </div>
 
 
-                <div id="data002" style="display: none">
+                <div id="data004" style="display: none">
 
                 </div>
 
